@@ -15,7 +15,7 @@ Use [PureStake](https://www.purestake.com/) to connect to the Algorand network. 
 
 We will see how to exchange data with Algos (Algorand cryptocurrecy). In order to do so we will use [Atomic Transfer](https://developer.algorand.org/docs/features/atomic_transfers/), an Algorand tool, where a group of transactions are submitted as a unit and all transactions in the batch either pass or fail.
 
-## 1.3 Algorand real use case scenario
+### 1.3 Algorand real use case scenario
 
 * https://www.algorand.com/resources/news/planetwatch-environmental-usecase
 * https://planetwatch.io/wp-content/uploads/2020/04/PW_White-paper_eng_Web.pdf
@@ -51,7 +51,7 @@ const iota = Iota.composeAPI({
 * Refound your address with [IOTA Comnet Faucet](https://faucet.comnet.einfachiota.de/#/)
 
 
-## 2.2 IOTA + MAM
+### 2.2 IOTA + MAM
 
 * What is MAM? 
 
@@ -60,7 +60,7 @@ const iota = Iota.composeAPI({
 
 In this repo there is an example of usage of MAM. It is exctracted from this [example](https://gitlab.com/antonionardella/boschxdkmqttiotamam) with some improvements.
 
-## 2.3 IOTA real use case scenario
+### 2.3 IOTA real use case scenario
 
 We will go through this [tutorial](https://high-mobility.com/5LZy/blueprints/QYLJ/charging-payment-blueprint) where we simultate to charge an electric car and paying in IOTA for the charging.
 
