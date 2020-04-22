@@ -46,16 +46,22 @@ with ...
 const iota = Iota.composeAPI({
    provider: 'https://nodes.comnet.thetangle.org:443'
 });
+```
 
 * Refound your address with [IOTA Comnet Faucet](https://faucet.comnet.einfachiota.de/#/)
-```
+
 
 ## 2.2 IOTA + MAM
 
-* What is MAM? https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e
+* What is MAM? 
+
+  * [Blog](https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e)
+  * [Documentation](https://docs.iota.org/docs/client-libraries/0.1/mam/introduction/overview)
+
+In this repo there is an example of usage of MAM. It is exctracted from this [example](https://gitlab.com/antonionardella/boschxdkmqttiotamam) with some improvements.
 
 ## 2.3 IOTA real use case scenario
 
-We will go through the [tutorial](https://high-mobility.com/5LZy/blueprints/QYLJ/charging-payment-blueprint) where we simultate to charge an electric car and paying in IOTA for the charging.
+We will go through this [tutorial](https://high-mobility.com/5LZy/blueprints/QYLJ/charging-payment-blueprint) where we simultate to charge an electric car and paying in IOTA for the charging.
 
 We will, then, see this other [example](https://www.hackster.io/l3wi/pay-per-coffee-a6e55f) from Hackster.
