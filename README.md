@@ -9,7 +9,9 @@
 
 We will see how to send a transaction with Algorand. More information from this [page](https://developer.algorand.org/docs/build-apps/hello_world/).
 
-Use [PureStake](https://www.purestake.com/) to connect to the Algorand network. Otherwise you can build your own node using Algorand [sandbox](https://github.com/algorand/sandbox)
+Use [PureStake](https://www.purestake.com/) to connect to the Algorand Testnet network. Otherwise you can build your own node using Algorand [sandbox](https://github.com/algorand/sandbox). 
+
+To charge your account with money go to: https://bank.testnet.algorand.network/
 
 ### 1.2 Exchanging data with money on Algorand
 
