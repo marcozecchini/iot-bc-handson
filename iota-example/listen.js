@@ -1,8 +1,8 @@
 const zmq = require('zeromq');
-const sock = zmq.socket('sub');
+const sock = new zmq.Subscriber()
 
 // Connect to a Devnet node's ZMQ port
-sock.connect('tcp://zmq.devnet.iota.org:5556');
+sock.connect('tcp://tanglebeat.com:5556');
 
 // Check for a command-line argument
 if (!process.argv[2]) {
@@ -23,7 +23,7 @@ if (!process.argv[2]) {
   sock.subscribe(process.argv[2])
 }
 
-sock.on('message', msg => {
+sock.receive().then(msg => {
    // Split the data into an array
   const data = msg.toString().split(' ');
   switch (

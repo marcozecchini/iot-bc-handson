@@ -34,7 +34,7 @@ const seed = 'PUEOTSEITFEVEWCWBTSIZM9NKRGJEIMXTULBACGFRQK9IMGICLBKW9TTEVSDQMGWKB
 function sendToTangle(msg) {
     // Define a JSON message to send.
     // This message must include only ASCII characters.
-    const message = JSON.stringify({ "message": msg });
+    const message = JSON.stringify({ "message": msg.toString() });
     // Convert the message to trytes
     const messageInTrytes = Converter.asciiToTrytes(message);
     // Define a zero-value transaction object
@@ -58,6 +58,7 @@ function sendToTangle(msg) {
             return iota.getBundle(tailTransactionHash)
                 .then(bundle => {
                     // Get your hello world message from the transaction's `signatureMessageFragment` field and print it to the console
+                    console.log("Retrieved from the Tangle ...")
                     console.log(JSON.parse(Extract.extractJson(bundle))); // TODO parse
                 });
         })
