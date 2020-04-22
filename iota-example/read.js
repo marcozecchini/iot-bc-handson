@@ -7,7 +7,7 @@ const iota = Iota.composeAPI({
 });
 
 // Define the tail transaction hash of the bundle whose messages you want to read
-const tailTransactionHash =
+var tailTransactionHash =
     'KVM9SMBORHKRVQKUPBOKRTBZF9AFXGPYFNFRCIZZPFMYFLQWZM9ZWYDUNMNVXVLEIXVL9FBHAZTHLZ999';
 
 if (!process.argv[2]){

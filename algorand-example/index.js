@@ -24,6 +24,7 @@ const postHeader = {
 let algodclient = new algosdk.Algod(token, baseServer, port); 
 
 //Create an account or ...
+
 // var account = algosdk.generateAccount();
 // var mnemonic = algosdk.secretKeyToMnemonic(account.sk);
 // console.log("Mnemonic is: " + mnemonic);
