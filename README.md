@@ -64,6 +64,6 @@ In this repo there is an example of usage of MAM. It is exctracted from this [ex
 
 ### 2.3 IOTA real use case scenario
 
-We will go through this [tutorial](https://high-mobility.com/5LZy/blueprints/QYLJ/charging-payment-blueprint) where we simultate to charge an electric car and paying in IOTA for the charging.
+We will go through this [tutorial](https://high-mobility.com/5LZy/blueprints/QYLJ/charging-payment-blueprint) where we simultate to charge an electric car and paying in IOTA for the charging. Another example with High Mobility is in this [video](https://youtu.be/L-O-okg0bWk).
 
 We will, then, see this other [example](https://www.hackster.io/l3wi/pay-per-coffee-a6e55f) from Hackster.
