@@ -32,7 +32,7 @@ From [docs](https://docs.iota.org/docs/getting-started/0.1/references/quickstart
 
 ### 2.1 IOTA Tutorials
 
-* We will go through [IOTA tutorials](https://docs.iota.org/docs/client-libraries/0.1/how-to-guides/js/get-started) for Javascript
+* We will go through [IOTA tutorials](https://docs.iota.org/docs/client-libraries/0.1/how-to-guides/js/get-started) [2](https://github.com/iota-community/javascript-iota-workshop) for Javascript
 
 Note that devnet is not working anymore. Change all the ...
 
