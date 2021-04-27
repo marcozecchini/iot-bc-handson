@@ -11,7 +11,7 @@ client.on('connect', function () {
 });
 
 
-const baseServer = 'https://testnet-algorand.api.purestake.io/ps1';
+const baseServer = 'https://testnet-algorand.api.purestake.io/ps2';
 const port = '';
 const token = {
     'X-API-Key': 'F9I45UDrFb9FuoYhohD35A2Tcfq0mnZ5cTuG81x9',
@@ -21,7 +21,7 @@ const postHeader = {
 }
 
 //instantiate the algod wrapper
-let algodclient = new algosdk.Algod(token, baseServer, port); 
+let algodclient = new algosdk.Algodv2(token, baseServer, port); 
 
 //Create an account or ...
 
@@ -45,34 +45,38 @@ client.on('message', function (topic, message){
 
 async function sendToAlgorand(msg) {
     try{
-        await util.wait_for_money(algodclient, account.addr);
+        let accountInfo = await algodclient.accountInformation(account.addr).do();
+        console.log("Account balance: %d microAlgos", accountInfo.amount);
+
         //Get the relevant params from the algod
-        let params = await algodclient.getTransactionParams();
+        let params = await algodclient.getTransactionParams().do();
         let note = algosdk.encodeObj(msg);
 
+        params.fee = 1000;
+        params.flatFee = true;
+        const receiver = "GD64YIY3TWGDMCNPP553DZPPR6LDUSFQOIJVFDPPXWEG3FVOJCCDBBHU5A";
+
         // setting up transaction record fields
-        let txn = {
-            "from": account.addr,
-            "to": account.addr,
-            "fee": params.minFee,
-            "amount": 10000,
-            "firstRound": params.lastRound,
-            "lastRound": params.lastRound + 1000,
-            "note": note,
-            "genesisID": params.genesisID,
-            "genesisHash": params.genesishashb64
-        };
+        
+        let txn = algosdk.makePaymentTxnWithSuggestedParams(account.addr, receiver, 10000, undefined, note, params);        
+
+
         //sign the transaction
-        let signedTxn = algosdk.signTransaction(txn, account.sk);
+        let signedTxn = txn.signTxn(account.sk);
+        let txId = txn.txID().toString();
+        console.log("Signed transaction with txID: %s", txId);
+
         //submit the transaction
-        let tx = (await algodclient.sendRawTransaction(signedTxn.blob, postHeader));
-        console.log("Transaction : " + tx.txId);
-
-        await util.waitForConfirmation( algodclient, tx.txId );
-
-        tx = (await algodclient.transactionInformation(account.addr, tx.txId));
-        let decodeNote = Buffer.from(algosdk.decodeObj(tx.note)).toString();
-        console.log("Note field of the transaction: " + decodeNote);
+        await algodclient.sendRawTransaction(signedTxn).do();        
+        
+        // Wait for confirmation
+        let confirmedTxn = await util.waitForConfirmation(algodclient, txId, 4);
+        //Get the completed Transaction
+        console.log("Transaction " + txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
+        let mytxinfo = JSON.stringify(confirmedTxn.txn.txn, undefined, 2);
+        console.log("Transaction information: %o", mytxinfo);
+        var string = new TextDecoder().decode(confirmedTxn.txn.txn.note);
+        console.log("Note field: ", string);
 
     } catch (e) {
         console.log(e);
