@@ -2,17 +2,18 @@ const Iota = require('@iota/core');
 
 // Connect to a node
 const iota = Iota.composeAPI({
-  provider: 'https://nodes.comnet.thetangle.org:443'
+  provider: 'https://nodes.devnet.iota.org:443'
 });
 
 // Define the security level of the address
 const securityLevel = 2;
 
 // The seed that will be used to generate an address
-const seed = 'JMQPFM9YFERXVPYKJXJXZMXNKTQHQIRXWIATJRGDSAICLLFQOW9RQVY9GRSHGCWFKOBJHJOYBISNZGHYR';
-var addr = "ECYAUAQJTWZXNNRKK9UOSMACUCHWTLENQZHJFUUCJEPWFEYONBYOPKAIFQFP9G99MYS9USYLFEI9NSFHWGNBWLCHIA"; 
+const seed = 'RVIHYRGVQJDPYZM9ZGVBEEB9BGESDNVXE9QAPGDFYUPQMHFSUSDBVTXO9L9L9TZNYSTSBVBCRXSYHCVJL';
+var addr = "RODNONA9TDIJDKGSGPZCKUIBZZ9WFUZMHVAYDZZTIPDMMPBNALYGAPIADFCTKZLNTTOKQUVKA9SWHCSRY"; 
 
-
+const depth = 3;
+const minimumWeightMagnitude = 9;
 
 // Create a wrapping function so you can use async/await
 const main = async () => {
@@ -35,7 +36,7 @@ const main = async () => {
       // Construct bundle and convert to trytes
       const trytes = await iota.prepareTransfers(seed, transfers);
       // Send bundle to node.
-      const response = await iota.sendTrytes(trytes, 3, 10);
+      const response = await iota.sendTrytes(trytes, depth, minimumWeightMagnitude);
   
       console.log('Bundle sent');
       response.map(tx => console.log(tx));

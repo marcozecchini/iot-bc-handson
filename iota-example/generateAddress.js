@@ -2,8 +2,7 @@ const Iota = require('@iota/core');
 
 // Connect to a node
 const iota = Iota.composeAPI({
-    provider: 'https://nodes.devnet.iota.org:443'
-    // provider: 'https://nodes.comnet.thetangle.org:443'
+  provider: 'https://nodes.devnet.iota.org:443'
 });
 
 // Define the security level of the address
@@ -11,7 +10,7 @@ const securityLevel = 2;
 
 // The seed that will be used to generate an address
 const seed =
-  'QRSGEWIDNYJPPCUKBMSVLZOTMLNEJPAQMOXJATGCTQNPJYDBWARB99CXQZYCBSNZJALYXPXDHOOLPHAMT';
+  'RVIHYRGVQJDPYZM9ZGVBEEB9BGESDNVXE9QAPGDFYUPQMHFSUSDBVTXO9L9L9TZNYSTSBVBCRXSYHCVJL';
 
 
 // Generate an unspent address with security level 2

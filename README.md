@@ -32,37 +32,26 @@ From [docs](https://docs.iota.org/docs/getting-started/0.1/references/quickstart
 
 ### 2.1 IOTA Tutorials
 
-* We will go through [IOTA tutorials](https://docs.iota.org/docs/client-libraries/0.1/how-to-guides/js/get-started) [2](https://github.com/iota-community/javascript-iota-workshop) for Javascript
-
-Note that devnet is not working anymore. Change all the ...
-
-``` javascript
-const iota = Iota.composeAPI({
-    provider: 'https://nodes.devnet.iota.org:443'
-});
-```
-
-with ... 
-
-``` javascript
-const iota = Iota.composeAPI({
-   provider: 'https://nodes.comnet.thetangle.org:443'
-});
-```
+* We will go through [IOTA tutorials](https://legacy.docs.iota.org/docs/core/1.0/getting-started/get-started-js) ([Official code](https://github.com/iota-community/javascript-iota-workshop)) for Javascript
 
 * Refound your address with [IOTA Comnet Faucet](https://faucet.comnet.einfachiota.de/#/)
 
+### 2.2 IOTA application blueprints
 
-### 2.2 IOTA + MAM
+#### [Data Marketplace](https://legacy.docs.iota.org/docs/blueprints/0.1/data-marketplace/overview)
+
+> Data silos make it difficult to buy and sell data among different data points. To overcome this challenge, the Data Marketplace uses Masked Authenticated Messaging (MAM) channels to open up the data silos and allow users to make micropayments of IOTA tokens to the data owners in exchange for data.
+
+Deployed proof of concept is available [here](https://data.iota.org/#/)
 
 * What is MAM? 
 
   * [Blog](https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e)
   * [Documentation](https://docs.iota.org/docs/client-libraries/0.1/mam/introduction/overview)
 
-In this repo there is an example of usage of MAM. It is exctracted from this [example](https://gitlab.com/antonionardella/boschxdkmqttiotamam) with some improvements.
+#### [Proof of Existence]
 
-### 2.3 IOTA real use case scenario
+### 2.3 IOTA and electric car
 
 We will go through this [tutorial](https://high-mobility.com/5LZy/blueprints/QYLJ/charging-payment-blueprint) where we simultate to charge an electric car and paying in IOTA for the charging. Another example with High Mobility is in this [video](https://youtu.be/L-O-okg0bWk).
 

@@ -1,8 +1,12 @@
+///////////////////////////////
+// Listen to live transactions
+///////////////////////////////
+
 const zmq = require('zeromq');
-const sock = new zmq.Subscriber()
+const sock = zmq.socket('sub');
 
 // Connect to a Devnet node's ZMQ port
-sock.connect('tcp://tanglebeat.com:5556');
+sock.connect('tcp://zmq.devnet.iota.org:5556');
 
 // Check for a command-line argument
 if (!process.argv[2]) {
@@ -11,7 +15,7 @@ if (!process.argv[2]) {
   console.log('---------------------')
   console.log('If you want to listen for transactions that are sent to a particular address,');
   console.log('pass the address to the `node` command as a command-line argument.');
-  console.log('For example: node 6-zmq-listen.js AN...ADDRESS')
+  console.log('For example: node listen.js AN...ADDRESS')
 
   // Subscribe to all transactions that the node receives
   sock.subscribe('tx');
@@ -23,7 +27,7 @@ if (!process.argv[2]) {
   sock.subscribe(process.argv[2])
 }
 
-sock.receive().then(msg => {
+sock.on('message', msg => {
    // Split the data into an array
   const data = msg.toString().split(' ');
   switch (

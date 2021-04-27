@@ -18,10 +18,11 @@ client.on('message', function (topic, message){
 });
 // Connect to a node
 const iota = Iota.composeAPI({
-    provider: 'https://nodes.comnet.thetangle.org:443'
+    provider: 'https://nodes.devnet.iota.org:443'
 });
+
 const depth = 3;
-const minimumWeightMagnitude = 10; // how much hard is the PoW challenge
+const minimumWeightMagnitude = 9; // how much hard is the PoW challenge
 
 // Define a seed and an address.
 // These do not need to belong to anyone or have IOTA tokens.

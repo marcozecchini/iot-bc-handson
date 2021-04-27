@@ -3,12 +3,12 @@ const Extract = require('@iota/extract-json');
 
 // Connect to a node
 const iota = Iota.composeAPI({
-  provider: 'https://nodes.comnet.thetangle.org:443'
+  provider: 'https://nodes.devnet.iota.org:443'
 });
 
 // Define the tail transaction hash of the bundle whose messages you want to read
 var tailTransactionHash =
-    'KVM9SMBORHKRVQKUPBOKRTBZF9AFXGPYFNFRCIZZPFMYFLQWZM9ZWYDUNMNVXVLEIXVL9FBHAZTHLZ999';
+    'IZEMPJKJZDM9THHSOXOVAWWSAKTE9SIFIFAYMODENAVDQFFCNTRQIATXHQKWKQYZUCGTXASX99UWFR999';
 
 if (!process.argv[2]){
     console.log("PASS AN ARGUMENT");

@@ -1,53 +1,57 @@
-'use strict'
+const Mam = require('@iota/mam');
+const { asciiToTrytes, trytesToAscii } = require('@iota/converter');
 
-const MAM_public = require('./lib/attachDataPublic.js')
-const MAM_private = require('./lib/attachDataPrivate.js')
-const MAM_restricted = require('./lib/attachDataRestricted.js')
-const IOTA = require('iota.lib.js')
-const iota = new IOTA("https://nodes.comnet.thetangle.org:443")
-const mqtt = require ('mqtt');
+const mode = 'public';
+const provider = 'https://nodes.devnet.iota.org';
 
-var client  = mqtt.connect('mqtt://127.0.0.1:1883');
-var jsonData = null;
+const providerName = 'devnet';
+const mamExplorerLink = 'https://utils.iota.org/mam';
 
-//connect and subscribe to topic
+const publish = async packet => {
+    // Create MAM message as a string of trytes
+    const trytes = asciiToTrytes(JSON.stringify(packet));
+    const message = Mam.create(mamState, trytes);
 
-client.on('connect', function () {
-  client.subscribe('test');
-  console.log('client has subscribed successfully');
-});
+    // Save your new mamState
+    mamState = message.state;
+    // Attach the message to the Tangle
+    await Mam.attach(message.payload, message.address, 3, 9);
 
-function getmyjson(myjson){
-	jsonData = JSON.parse(myjson);
-	console.log(jsonData);
-};
-
-// get data
-client.on('message', function (topic, message){
-	getmyjson(message);
-	start();
-});
-
-let date,i=1
-
-console.log('\n\nSENDING DATA!!\n\n')
-
-//Create a JSON as message
-
-function start(){
-	date = new Date(Date.now()).toLocaleString()
-    // ORIGINAL LINE let message = { 'Message' : i, 'Date' : date}
-    let message = { 'Message' : i, 'device-id': jsonData.id, 'humidity' : jsonData.data.Humidity, 'pressure' : jsonData.data.Pressure, 'temperature' :jsonData.Temperature };
-	switch(process.argv[2]){								//Getting the mode of the stream (Public:1, Private:2, Restricted: 3)
-		case '1': MAM_public.attach(message);break;
-		case '2': MAM_private.attach(message);break;
-		case '3': MAM_restricted.attach(message);break;
-		default: MAM_public.attach(message)
-	}
-	console.log('Start sending data to Tangle...')
-	let messageS = JSON.stringify(message)
-	console.log('Message: %s',messageS)
-	console.log('Message in trytes: ' + iota.utils.toTrytes(messageS))
-	console.log('--------------------------------------------------------------------------------------------------------------------')
-	i++
+    console.log('Published', packet, '\n');
+    return message.root;
 }
+
+const publishAll = async () => {
+	const root = await publish({
+	  message: 'Message from Alice',
+	  timestamp: (new Date()).toLocaleString()
+	});
+  
+	await publish({
+	  message: 'Message from Bob',
+	  timestamp: (new Date()).toLocaleString()
+	});
+  
+	await publish({
+	  message: 'Message from Charlie',
+	  timestamp: (new Date()).toLocaleString()
+	});
+  
+	return root;
+  }
+
+// Callback used to pass data out of the fetch
+const logData = data => console.log('Fetched and parsed', JSON.parse(trytesToAscii(data)), '\n');
+
+publishAll()
+  .then(async root => {
+
+    // Output asynchronously using "logData" callback function
+    await Mam.fetch(root, mode, null, logData);
+
+    // Output synchronously once fetch is completed
+    const result = await Mam.fetch(root, mode);
+    result.messages.forEach(message => console.log('Fetched and parsed', JSON.parse(trytesToAscii(message)), '\n'));
+
+	console.log(`Verify with MAM Explorer:\n${mamExplorerLink}/${root}/${mode}/${providerName}\n`);
+});  
