@@ -34,7 +34,7 @@ From [docs](https://docs.iota.org/docs/getting-started/0.1/references/quickstart
 
 * We will go through [IOTA tutorials](https://legacy.docs.iota.org/docs/core/1.0/getting-started/get-started-js) ([Official code](https://github.com/iota-community/javascript-iota-workshop)) for Javascript
 
-* Refound your address with [IOTA Comnet Faucet](https://faucet.comnet.einfachiota.de/#/)
+* Refound your address with [IOTA Devnet Faucet](https://faucet.devnet.iota.org/)
 
 ### 2.2 IOTA application blueprints
 
@@ -42,14 +42,18 @@ From [docs](https://docs.iota.org/docs/getting-started/0.1/references/quickstart
 
 > Data silos make it difficult to buy and sell data among different data points. To overcome this challenge, the Data Marketplace uses Masked Authenticated Messaging (MAM) channels to open up the data silos and allow users to make micropayments of IOTA tokens to the data owners in exchange for data.
 
-Deployed proof of concept is available [here](https://data.iota.org/#/)
+See an [application architecture](https://legacy.docs.iota.org/docs/blueprints/0.1/data-marketplace/architecture) as an example of usage. Deployed proof of concept is available [here](https://data.iota.org/#/)
 
 * What is MAM? 
 
   * [Blog](https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e)
   * [Documentation](https://docs.iota.org/docs/client-libraries/0.1/mam/introduction/overview)
 
-#### [Proof of Existence]
+#### [Proof of Existence](https://legacy.docs.iota.org/docs/blueprints/0.1/doc-immutability/overview)
+
+> Documents are an important means of transporting information and contracts between parties. Being able to reliably prove that a document has not been changed from an established state helps ensure trust between parties. As well as protect the parties. This blueprint describes a solution that automatically checks the signature of a previously signed document using the IOTA Tangle.
+
+See an [application Architecture](https://legacy.docs.iota.org/docs/blueprints/0.1/doc-immutability/architecture) as an example of usage. We will test this [library](https://legacy.docs.iota.org/docs/tangle-certificate/1.0/getting-started/create-certificate).
 
 ### 2.3 IOTA and electric car
 

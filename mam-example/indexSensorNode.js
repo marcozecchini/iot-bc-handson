@@ -1,72 +1,70 @@
-'use strict'
-
-const MAM_public = require('./lib/attachDataPublic.js')
-const MAM_private = require('./lib/attachDataPrivate.js')
-const MAM_restricted = require('./lib/attachDataRestricted.js')
-const IOTA = require('iota.lib.js')
-const iota = new IOTA()
+const Mam = require('@iota/mam')
+const { asciiToTrytes, trytesToAscii } = require('@iota/converter')
 const mqtt = require ('mqtt');
-
 var client  = mqtt.connect('mqtt://127.0.0.1:1883');
-var jsonData = null;
 
+// const mode = 'public'
+const provider = 'https://nodes.devnet.iota.org'
+var mode = 'public';
+let mamState = Mam.init(provider);
+let sideKey = undefined;
+
+switch(process.argv[2]){								//Getting the mode of the stream (Public:1, Private:2, Restricted: 3)
+	case '1': mode='public';break;
+	case '2': mode='private';break;
+	case '3': mode='restricted';break;
+	default: mode='public';
+}
+if (mode === 'restricted') { 
+	sideKey = process.argv[3];
+	mamState = Mam.changeMode(mamState, mode, sideKey);
+}
+else if (mode === 'private') { 
+	mamState = Mam.changeMode(mamState, mode, undefined);
+}
 //connect and subscribe to topic
-
 client.on('connect', function () {
   client.subscribe('test');
   console.log('MQTT client has subscribed successfully');
 });
 
-function getmyjson(myjson){
-	jsonData = JSON.parse(myjson);
-};
 
 // get data
-client.on('message', function (topic, message){
-  getmyjson(message);
+client.on('message', function (topic, message) {
+  send(message);
 });
 
-let timeLoop,date,
-	i=1
-
-if( process.argv[2] == undefined){          //Getting the time in seconds for the loop
-  timeLoop = 60000                       //default 1 minute
-} else {
-  timeLoop = process.argv[2]*1000
-}
+let i=1
 
 //Create a JSON as message
+async function send(msg){
+	try{
+		console.log('Start sending data to Tangle...')
+		console.log('Message: %s',msg)
+		console.log('--------------------------------------------------------------------------------------------------------------------')
 
-function start(){
-	const time = Date.now();
-	let message = {
-			'Message' : i,
-			'id' : jsonData.ident,
-			'location' : {
-							'lat' : YOURLATITUDE,
-							'lng' : YOURLONGITUDE
-									 },
-			'timestamp' : time,
-			'data' : {
-			'humidity' : jsonData.Humidity + ' %RH',
-			'pressure' : jsonData.Pressure/1000 + ' hPa',
-			'temperature' : jsonData.Temperature/1000 + ' °C'
-							 },
-			};
-	switch(process.argv[3]){								//Getting the mode of the stream (Public:1, Private:2, Restricted: 3)
-		case '1': MAM_public.attach(message);break;
-		case '2': MAM_private.attach(message);break;
-		case '3': MAM_restricted.attach(message);break;
-		default: MAM_public.attach(message)
-	}
-	console.log('Start sending data to Tangle...')
-	let messageS = JSON.stringify(message)
-	console.log('Message: %s',messageS)
-	console.log('Message in trytes: ' + iota.utils.toTrytes(messageS))
-	console.log('--------------------------------------------------------------------------------------------------------------------')
-	i++
+		let root = await publish({
+			message: msg,
+			timestamp: (new Date()).toLocaleString()
+		})
+
+		console.log('Root: %s',root)
+	} catch (e) {console.log(e)}
+
 }
 
-setInterval(function(){
-	start()
-},timeLoop)
+// Publish to tangle
+const publish = async packet => {
+    // Create MAM Payload - STRING OF TRYTES
+    const trytes = asciiToTrytes(JSON.stringify(packet))
+    const message = Mam.create(mamState, trytes)
+
+    // Save new mamState
+    mamState = message.state
+
+    // Attach the payload
+    await Mam.attach(message.payload, message.address, 3, 9)
+
+    console.log('Published', packet, '\n');
+    return message.root
+}
