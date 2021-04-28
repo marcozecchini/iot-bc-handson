@@ -59,8 +59,7 @@ See an [application architecture](https://legacy.docs.iota.org/docs/blueprints/0
 
 See an [application Architecture](https://legacy.docs.iota.org/docs/blueprints/0.1/doc-immutability/architecture) as an example of usage. We will test this [library](https://legacy.docs.iota.org/docs/tangle-certificate/1.0/getting-started/create-certificate).
 
-### 2.3 IOTA and electric car
-
-We will go through this [tutorial](https://high-mobility.com/5LZy/blueprints/QYLJ/charging-payment-blueprint) where we simultate to charge an electric car and paying in IOTA for the charging. Another example with High Mobility is in this [video](https://youtu.be/L-O-okg0bWk).
+#### [HIGH-MOBILITY](https://high-mobility.com/) car
+We will go through this [tutorial](https://docs.high-mobility.com/guides/getting-started/node-js/) where we simultate to drive a car and publishing the data on MAM stream. Another explanation is in this [video](https://youtu.be/L-O-okg0bWk).
 
 We will, then, see these other examples: [example1](https://www.hackster.io/l3wi/pay-per-coffee-a6e55f) from Hackster, [example2](https://www.hackster.io/fakemau5/iotair-pay-per-use-air-conditioning-bf1b92)

@@ -15,36 +15,30 @@ const { asciiToTrytes } = require('@iota/converter')
 // A random seed is generated since we won't be providing one
 // Keep in mind that if you use a dedicated seed you need to keep track of the
 // state of MAM in order for the MAM stream to work correctly.
-let mamState = Mam.init('https://nodes.comnet.thetangle.org:443')
+let mamState = Mam.init('https://nodes.devnet.iota.org:443');
 
 // We are using MAM restricted mode with a shared secret in this example
-const mamType = 'restricted'
-const mamSecret = 'IOT2020'
+// const mamType = 'public'
+// const mamSecret = 'IOT2021'
 
 // Initialize the High Mobility SDK with our Cloud App Client Certificate
-// FIXME: Change to your own HMKit Client Certificate
 const hmkit = new HMKit(
-  "dGVzdN/pqZTc4SBbVrCNLgshNVHe8aPqZtB0kPjNzP6tQKWkHd1ahOTBZ5HZE3rVhi/kUPFjYXTaJaZ3DiwFsvmvGEqYOjCsqFTlDH7BGVZm2ZweIOMWbKfLoV2uFHav1NKWNCCONQ/uHR5I9SfAONK90ukvBZZYyTOCKNHknES8sHnFXK5/KWBQ+7gJzV3lFyGpqS441EBp",
-  "9SwqaZryNgRxCy8X+u+XwRi+ssEYlVVVd08Y4BiEcGE="
+  "dGVzdDNNoBt6XPgTsUBco0RycGm80Fl7WdOZTqsOhd1VerHQLAW4OW69TTcLNsywb2ikfnNVwAxNiA+drMILo05btHf6T7EM8WAE7uaujDybNLCMb1WroP9pmNuz8/w1LqJKEAg/GyA3xXoekSf/iPere4Isy4LGXWk9YA5+dK/N/IqN5FOhCCMXrefQy55xxT0KHzo8g6DP",
+  "4200xFBYVuBR38On08p6gies8pWv/+wVOIjPmNMWZfo="
 );
 
 // The access certificate for our car simulator is defined here
-// FIXME: Change to your own Vehicle Access Token
-const accessToken = '08a0b4d4-0ed6-42fb-af99-4715c93163b9'
+const accessToken = '2a3a01ef-abe4-4734-ba16-4ee404f5c394'
+
 
 // You don't have to edit anything below this comment for this example
-
-mamState = Mam.changeMode(mamState, mamType, mamSecret)
+// mamState = Mam.changeMode(mamState, mamType, mamSecret)
 
 let lastCoords = null
 
 // This function will take the High Mobility data and will publish it to the tangle
 async function publish (data) {
   // We store the last sent coordinates so we won't have to send to the tangle unless we have a new position
-  if (JSON.stringify(data.coordinates) === lastCoords) {
-    console.log('Duplicate coordinates received, skipping...')
-    return
-  }
 
   // If it are new coordinates we create a new JSON string to send to the tangle
   console.log('Coordinates received:', data.coordinates)
@@ -64,7 +58,7 @@ async function publish (data) {
 
   // Attach the message to the MAM stream / Tangle
   try {
-    await Mam.attach(message.payload, message.address, 3, 10)
+    await Mam.attach(message.payload, message.address, 3, 9)
     console.log('Attached to tangle!')
   } catch (e) {
     console.log(e)
@@ -88,11 +82,11 @@ async function updateLocation () {
   try {
     // Ask for the current Location based on the Auto API
     // https://high-mobility.com/learn/documentation/cloud-sdks/node-js/commands/
-    const response = await hmkit.telematics.sendCommand(
-      accessCertificate.getVehicleSerial(),
-      hmkit.commands.VehicleLocationCommand.getLocation()
-    )
-
+    let response = await hmkit.telematics.sendCommand(
+      hmkit.commands.VehicleLocation.getVehicleLocation(),
+      accessCertificate
+    );
+    
     // If we receive a valid response we can publish it to our MAM stream
     publish(response.parse())
   } catch (e) {

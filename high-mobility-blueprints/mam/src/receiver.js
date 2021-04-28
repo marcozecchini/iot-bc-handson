@@ -9,8 +9,9 @@ const Mam = require('@iota/mam')
 const { trytesToAscii } = require('@iota/converter')
 
 // Initialize the MAM library by providing the Node, mode and secret key to use
-const mamType = 'restricted'
-const mamSecret = 'DONTSHARETHIS'
+const mamType = 'public'
+// const mamType = 'restricted'
+// const mamSecret = 'IOT2021'
 
 // We keep track of our current and next root so we know what to listen to and when to
 // output data to the screen
@@ -18,7 +19,7 @@ let root = null
 let nextRoot = process.argv[2]
 
 // Display coordinate data on our screen when we receive it
-function showData (raw) {
+const showData = (raw) => {
   const data = JSON.parse(trytesToAscii(raw))
   console.log(data.ts, '-', data.coords)
 }
@@ -39,7 +40,7 @@ async function checkMam () {
   }
 
   // The showData callback will be called in order for each message found
-  const data = await Mam.fetch(root, mamType, mamSecret, showData)
+  const data = await Mam.fetch(root, mamType, undefined, showData)
   nextRoot = data.nextRoot
 
   // Check again in 5 seconds
