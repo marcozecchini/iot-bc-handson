@@ -51,7 +51,7 @@ See an [application architecture](https://legacy.docs.iota.org/docs/blueprints/0
 * What is MAM? 
 
   * [Blog](https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e)
-  * [Documentation](https://docs.iota.org/docs/client-libraries/0.1/mam/introduction/overview)
+  * [Documentation](https://legacy.docs.iota.org/docs/client-libraries/0.1/mam/introduction/overview)
 
 #### [Proof of Existence](https://legacy.docs.iota.org/docs/blueprints/0.1/doc-immutability/overview)
 
