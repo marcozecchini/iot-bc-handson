@@ -24,7 +24,7 @@ In this example (see folder `sc-algorand-example`) we will exchange data for Alg
 ### 1.4 Algorand real use case scenario
 
 * https://www.algorand.com/resources/news/planetwatch-environmental-usecase
-* https://planetwatch.io/wp-content/uploads/2020/04/PW_White-paper_eng_Web.pdf
+* [Planet Watch](https://www.youtube.com/watch?v=ZRpGM2LutZ4)
 
 ## 2. IOTA
 
