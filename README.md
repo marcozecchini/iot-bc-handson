@@ -1,5 +1,7 @@
 # IOT - BC hands-on class
-Introductionary slides from professor vitaletti available at this [link](https://docs.google.com/presentation/d/1UenA4HRkTk0BsRI3MWEYIjN4JbbCbxehe3j5gPjzNGg/edit#slide=id.g11abf396aee_0_11)
+Introductionary slides from professor vitaletti available at this [link](https://docs.google.com/presentation/d/1UenA4HRkTk0BsRI3MWEYIjN4JbbCbxehe3j5gPjzNGg/edit#slide=id.g11abf396aee_0_11).
+
+For the whole lecture, we are simulating a device connected with MQTT with our node that forward measured data to the blockchain.
 
 ## 1. Ethereum 
 
@@ -31,7 +33,7 @@ We will see how to exchange data with a custom token (ERC20 compatible). To do t
 ### 1.5 Other projects compatible with IoT nodes 
 
 * Incubed: [Slides](https://slideslive.com/38911940), problem at slide 4/5, solution at slide 10
-* MINA protocol: [Documentation](https://docs.minaprotocol.com/about-mina)
+* MINA protocol: [Documentation](https://docs.minaprotocol.com/about-mina) and [Slide](https://docs.google.com/presentation/d/1UenA4HRkTk0BsRI3MWEYIjN4JbbCbxehe3j5gPjzNGg/edit#slide=id.g22ddbbb68d5_0_1205)
 
 ## 2. Algorand
 
