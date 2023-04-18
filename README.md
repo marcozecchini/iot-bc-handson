@@ -1,9 +1,37 @@
 # IOT - BC hands-on class
-Introductionary slides from professor vitaletti available at this [link](https://docs.google.com/presentation/d/1UenA4HRkTk0BsRI3MWEYIjN4JbbCbxehe3j5gPjzNGg/edit#slide=id.g11abf396aee_0_78)
+Introductionary slides from professor vitaletti available at this [link](https://docs.google.com/presentation/d/1UenA4HRkTk0BsRI3MWEYIjN4JbbCbxehe3j5gPjzNGg/edit#slide=id.g11abf396aee_0_11)
 
 ## 1. Ethereum 
 
 ### 1.1 Setup a project and deploy the first smart contract
+
+1. https://docs.openzeppelin.com/learn/developing-smart-contracts
+2. https://docs.openzeppelin.com/learn/deploying-and-interacting
+3. https://docs.openzeppelin.com/learn/connecting-to-public-test-networks
+
+### 1.2 Exchanging data with money on Ethereum
+
+We will see how to exchange data with Ether (Ethereum cryptocurrecy). To do that, we modify the `Box.sol` contract in a smart contract transfering token every time it receives a transaction (i.e., `Consumer.sol`). 
+
+### 1.3 Exchanging data with custom token on Ethereum
+We will see how to exchange data with a custom token (ERC20 compatible). To do that, we create a custom token according to [Openzeppelin documentation](https://docs.openzeppelin.com/contracts/4.x/erc20) and we modify `Consumer.sol` to transfer this token.
+
+### 1.4 Oracle 
+
+[Slide](https://docs.google.com/presentation/d/1UenA4HRkTk0BsRI3MWEYIjN4JbbCbxehe3j5gPjzNGg/edit#slide=id.g11abf396aee_0_48)
+
+1. Install chainlink contracts: `npm install @chainlink/contracts --save`
+2. Follows: https://docs.chain.link/any-api/get-request/examples/single-word-response/ 
+4. Run `npx hardhat run --network <network-name> scripts/deploy.js` to deploy `APIConsumer.sol`  contract
+5. Before invoking the `requestVolumeData` function in the `npx hardhat run --network <network-name> scripts/index.js` script, fund your contract with LINK and your account with Ether from https://faucets.chain.link/ 
+    
+    a. The faucet works only with Metamask. Send the LINK token from Metamask to your contract.
+
+
+### 1.5 Other projects compatible with IoT nodes 
+
+* Incubed: [Slides](https://slideslive.com/38911940), problem at slide 4/5, solution at slide 10
+* MINA protocol: [Documentation](https://docs.minaprotocol.com/about-mina)
 
 ## 2. Algorand
 
